@@ -44,9 +44,22 @@
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.EmployeeId"><i class="fas fa-edit"></i></a>
-                <a asp-action="Delete" asp-route-id="@item.EmployeeId"><i class="fas fa-eraser"></i></a>
+                <a onclick="alertMessage(@item.EmployeeId)"><i class="fas fa-eraser"></i></a>
             </td>
         </tr>
 }
     </tbody>
 </table>
+
+<script>
+
+    function alertMessage(item) {
+        if (confirm("Are you sure you want to delete this?")) {
+            $().ready(function () {
+                // $(".delete-button").click(null, DeleteItem); //DeleteItem is the callback
+                window.location.href = '@Url.Action("Delete", "Employees")/' + item;
+                return false;
+            });
+        }
+    }
+</script>
